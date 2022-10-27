@@ -2,11 +2,11 @@
 
 namespace App\Repository;
 
-use App\Entity\Produto;
+use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class ProdutoRepository extends ServiceEntityRepository
+class ProductRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {

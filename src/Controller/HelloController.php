@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Entity\Produto;
 use Doctrine\DBAL\Types\DecimalType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -34,7 +33,7 @@ class HelloController extends Controller
     public function mensagem()
     {
         return $this->render("hello/mensagem.html.twig", [
-            'mensagem' => "Olá School of net!"
+            'mensagem' => "Olá, Adriano!"
         ]);
     }
 
