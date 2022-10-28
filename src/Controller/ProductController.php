@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Produto;
+use App\Entity\Product;
 use App\Form\ProdutoType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ProdutoController extends Controller
+class ProductController extends Controller
 {
     /**
      * @Route("/produto", name="listar_produto")
@@ -20,7 +20,7 @@ class ProdutoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $produtos = $em->getRepository(Produto::class)->findAll();
+        $produtos = $em->getRepository(Product::class)->findAll();
 
         return [
             'produtos' => $produtos
@@ -37,7 +37,7 @@ class ProdutoController extends Controller
      */
     public function create(Request $request)
     {
-        $produto = new Produto();
+        $produto = new Product();
 
         $form = $this->createForm(ProdutoType::class, $produto);
 
@@ -71,7 +71,7 @@ class ProdutoController extends Controller
     public function update(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $produto = $em->getRepository(Produto::class)->find($id);
+        $produto = $em->getRepository(Product::class)->find($id);
 
         $form = $this->createForm(ProdutoType::class, $produto);
         $form->handleRequest($request);
@@ -80,7 +80,7 @@ class ProdutoController extends Controller
             $em->persist($produto);
             $em->flush();
 
-            $this->get("session")->getFlashBag()->set("success", "O Produto " . $produto->getNome() . " foi alterado com sucesso!");
+            $this->get("session")->getFlashBag()->set("success", "O Produto " . $produto->getName() . " foi alterado com sucesso!");
             return $this->redirectToRoute("listar_produto");
         }
 
@@ -101,7 +101,7 @@ class ProdutoController extends Controller
     public function view(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $produto = $em->getRepository(Produto::class)->find($id);
+        $produto = $em->getRepository(Product::class)->find($id);
 
         return [
             'produto' => $produto
@@ -120,7 +120,7 @@ class ProdutoController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
-        $produto = $em->getRepository(Produto::class)->find($id);
+        $produto = $em->getRepository(Product::class)->find($id);
 
         if (!$produto) {
             $mensagem = "Produto não foi encontrado!";

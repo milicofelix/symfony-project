@@ -10,7 +10,7 @@ class ProductRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Produto::class);
+        parent::__construct($registry, Product::class);
     }
 
     /*
