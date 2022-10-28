@@ -17,8 +17,66 @@ class Raca
      */
     private $id;
 
-    public function getId(): ?int
+     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=50)
+     */
+    private $nome;
+
+    /**
+     * @var object
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Especie", inversedBy="id")
+     */
+    private $especie;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    /**
+     * @param string $nome
+     * @return Raca
+     */
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+        return $this;
+    }
+
+    /**
+     * @return object
+     */
+    public function getEspecie()
+    {
+        return $this->especie;
+    }
+
+    /**
+     * @param object $especie
+     * @return Raca
+     */
+    public function setEspecie($especie)
+    {
+        $this->especie = $especie;
+        return $this;
+    }
+
+    public function getNomeEspecie()
+    {
+        return $this->getEspecie() ? $this->getEspecie()->getNome() : null;
     }
 }

@@ -17,8 +17,36 @@ class Especie
      */
     private $id;
 
-    public function getId(): ?int
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=50)
+     */
+    private $nome;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    /**
+     * @param string $nome
+     * @return Especie
+     */
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+        return $this;
     }
 }
