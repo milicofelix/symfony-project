@@ -9,22 +9,22 @@
     <div class="row">
         <div class="col-md-6">
             <table class="table table-striped">
-                {# {% for qts in qts_animais %} #}
+                {% for qts in qts_animais %}
                     <tr>
-                       {#  <th>{{ qts.nome }}</th>
+                       {<th>{{ qts.nome }}</th>
                         <td>{{ qts.qtde }}</td> #}
                     </tr>
-                {# {% endfor %} #}
+                {% endfor %}
             </table>
         </div>
         <div class="col-md-6">
             <table class="table table-striped">
-                {# {% for qts in qtde_por_raca %} #}
+                {% for qts in qtde_por_raca %}
                     <tr>
-                        {# <th>{{ qts.nome }}</th>
+                        {<th>{{ qts.nome }}</th>
                         <td>{{ qts.qtde }}</td> #}
                     </tr>
-                {# {% endfor %} #}
+                {% endfor %}
             </table>
         </div>
     </div>

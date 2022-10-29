@@ -2,11 +2,12 @@
 
 namespace App\Repository;
 
+use PDO;
 use App\Entity\Cliente;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Cliente>
@@ -47,32 +48,15 @@ class ClienteRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Cliente[] Returns an array of Cliente objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function qtsAnimaisPorCliente()
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $sql = "select COUNT(ac.animal_id) as qtde,
+                c.nome FROM animal_cliente ac INNER JOIN 
+                cliente c ON c.id = ac.cliente_id
+                GROUP BY c.nome
+        ";
 
-    /*
-    public function findOneBySomeField($value): ?Cliente
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->getEntityManager()->getConnection()->executeQuery($sql)
+            ->fetchAll(PDO::FETCH_OBJ);
     }
-    */
 }

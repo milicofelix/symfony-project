@@ -1,20 +1,53 @@
-{% extends 'base.html.twig' %}
+{% extends "base2.html.twig" %}
 
-{% block title %}Hello AnimaisController!{% endblock %}
+{% block title %} Listagem de Animais - {% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('warning') %}
+        <div class="alert alert-warning">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('danger') %}
+        <div class="alert alert-danger">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    <h1>Listagem de Animais</h1>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="{{ path('cadastrar_animal') }}" class="btn btn-primary">Cadastrar Animal</a>
+        </div>
+    </div>
+    <table class="table table-hover table-striped mt-3">
+        <thead>
+        <tr>
+            <th>Cod.</th>
+            <th>Nome</th>
+            <th>Data Nasc.</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for animal in animais %}
+            <tr>
+                <td>{{ animal.id }}</td>
+                <td><a href="{{ path('visualizar_animal', {'id': animal.id}) }}">{{ animal.nome }}</a></td>
+                <td>{{ animal.dataNascimento|date("d/m/Y") }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Nenhum registro encontrado!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/adriano/goflux/adriEstudos/schoolofnet/symfony_basic/src/Controller/AnimaisController.php'|file_link(0) }}">src/Controller/AnimaisController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/adriano/goflux/adriEstudos/schoolofnet/symfony_basic/templates/animais/index.html.twig'|file_link(0) }}">templates/animais/index.html.twig</a></code></li>
-    </ul>
-</div>
+
 {% endblock %}
