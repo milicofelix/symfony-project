@@ -48,8 +48,9 @@ class HelloController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $produto = new Product();
-        $produto->setName("Xbox")
-            ->setPrice(2300.00);
+        $produto->setName("Super Nintendo")
+            ->setPrice(800.00)
+            ->setDescription('Um dos melhores consoles do anos 90, tendo como concorrente o Mega Drive da Sega');
 
         $em->persist($produto);
         $em->flush();
@@ -70,6 +71,7 @@ class HelloController extends Controller
         $form = $this->createFormBuilder($produto)
         ->add('name', TextType::class, ['required' => true])
         ->add('price', TextType::class)
+        ->add('description', TextType::class)
         ->add('enviar', SubmitType::class, ['label' => "Salvar"])
         ->getForm();
         
